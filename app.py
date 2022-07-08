@@ -9,7 +9,6 @@ from feedgen.feed import FeedGenerator
 from flask import make_response
 from urllib.parse import urljoin
 from werkzeug.contrib.atom import AtomFeed
-from os import environ
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -132,12 +131,8 @@ def delete_ad_request(id):
 
 # running app
 def main():
-    HOST = environ.get('SERVER_HOST', 'localhost')
-    try:
-        PORT = int(environ.get('SERVER_PORT', '5555'))
-    except ValueError:
-        PORT = 5555
-    app.run(HOST, PORT, ssl_context='adhoc')
+    print(' ----->>>> Flask Python Application running in development server')
+    app.run(host=settings.SERVER_HOST, port=settings.SERVER_PORT, debug=settings.FLASK_DEBUG)
 
 
 if __name__ == '__main__':
